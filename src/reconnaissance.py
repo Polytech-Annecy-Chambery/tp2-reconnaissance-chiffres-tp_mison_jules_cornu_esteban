@@ -12,5 +12,19 @@ def lecture_modeles(chemin_dossier):
 
 
 def reconnaissance_chiffre(image, liste_modeles, S):
-    pass
+    
+    imabin = image.binarisation(S)
+    imaloca = imabin.localisation()
+    maxsim = 0
+    
+    for i in range(len(liste_modeles)):
+        
+        imaresi = imaloca.resize(liste_modeles[i].H, liste_modeles[i].W)
+        sim = imaresi.similitude(liste_modeles[i])
+        
+        if sim > maxsim:
+            maxsim = sim
+            maxsimI = i
+            
+    return maxsimI
 
